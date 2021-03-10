@@ -7,5 +7,9 @@
 	<div class="container-lg">
 		<!-- Content here -->
 		Hello,World 2021
+
+		<br/>
+<%--		<a href="/login">登录</a>--%>
+		<a href="/register">注册</a>
 	</div>
 </body>

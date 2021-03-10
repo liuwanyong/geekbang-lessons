@@ -1,9 +1,7 @@
 package org.geektimes.projects.user.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -20,21 +18,22 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = AUTO)
-    @NotNull
+//    @NotNull(message = "ID为不能为空")
+    @Min(1)
     private Long id;
 
     @Column
     private String name;
 
     @Column
-    @Max(32)
-    @Min(6)
+    @Size(min=6,max = 32,message = "密码长度必须在6~32位之间")
     private String password;
 
     @Column
     private String email;
 
     @Column
+    @Pattern(regexp = "^((13[0-9])|(14[0,1,4-9])|(15[0-3,5-9])|(16[2,5,6,7])|(17[0-8])|(18[0-9])|(19[0-3,5-9]))\\d{8}$",message = "手机号格式不正确")
     private String phoneNumber;
 
     public Long getId() {

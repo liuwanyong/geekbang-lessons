@@ -1,6 +1,6 @@
 <head>
 <jsp:directive.include file="/WEB-INF/jsp/prelude/include-head-meta.jspf" />
-	<title>My Home Page</title>
+	<title>登录</title>
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;

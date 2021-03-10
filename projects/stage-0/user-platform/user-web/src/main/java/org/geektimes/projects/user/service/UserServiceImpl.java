@@ -1,13 +1,19 @@
 package org.geektimes.projects.user.service;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.geektimes.projects.user.domain.User;
 import org.geektimes.projects.user.sql.LocalTransactional;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import java.util.Set;
 
 public class UserServiceImpl implements UserService {
+
+    private static final Log log= LogFactory.getLog(UserServiceImpl.class);
 
     @Resource(name = "bean/EntityManager")
     private EntityManager entityManager;
@@ -19,6 +25,19 @@ public class UserServiceImpl implements UserService {
     // 默认需要事务
     @LocalTransactional
     public boolean register(User user) {
+
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        if(violations.size()>0){
+            StringBuilder stringBuilder=new StringBuilder();
+            violations.forEach(c -> {
+                stringBuilder.append(c.getMessage()).append(",");
+            });
+            stringBuilder.delete(stringBuilder.length()-1,stringBuilder.length());
+            log.info(stringBuilder.toString());
+            throw new RuntimeException(stringBuilder.toString());
+        }
+
+
         // before process
 //        EntityTransaction transaction = entityManager.getTransaction();
 //        transaction.begin();

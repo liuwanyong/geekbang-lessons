@@ -2,7 +2,6 @@ package org.geektimes.context;
 
 import org.geektimes.function.ThrowableAction;
 import org.geektimes.function.ThrowableFunction;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
@@ -97,7 +96,7 @@ public class ComponentContext {
     }
 
     private void injectComponents(Object component, Class<?> componentClass) {
-        Stream.of(componentClass.getDeclaredFields())
+         Stream.of(componentClass.getDeclaredFields())
                 .filter(field -> {
                     int mods = field.getModifiers();
                     return !Modifier.isStatic(mods) &&
