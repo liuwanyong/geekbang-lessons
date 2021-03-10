@@ -26,7 +26,7 @@
 
 		<p>
 			<%
-			  String errors=(String) request.getAttribute("error");
+			  String errors=(String) request.getAttribute("errors");
 			  out.println(errors);
 			%>
 		</p>
